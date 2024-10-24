@@ -56,7 +56,21 @@ Before running the project, make sure you have the following installed:
     ACCESS_TOKEN_SECRET=your_secret_key
     MONGO_URI=your_mongodb_uri
 
-5. Start the server:
+5. Running the App with Docker
+This project is fully dockerized. You can run the app using Docker and Docker Compose.
+
+Step 1: Build and Run the Containers
+
+   ```bash
+   docker-compose up --build
+
+Step 2: Access the Application
+Once the containers are up, the application will be running on:
+
+   ```bash
+   http://localhost:5001
+
+6. Start the server:
 
     ```bash
     npm start
