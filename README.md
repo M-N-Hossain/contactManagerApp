@@ -71,52 +71,52 @@ Before running the project, make sure you have the following installed:
       
       MongoDB will be exposed on port 27017
 
-#### Docker Compose Configuration
-
-The Docker Compose file defines two services: the Node.js app and MongoDB.
-
-```yaml
-    version: '3'
-    services:
-    app:
-        build: .
-        ports:
-        - "5001:5001"
-        env_file:
-        - .env
-        environment:
-        NODE_ENV: docker
-        depends_on:
-        - mongo
-    mongo:
-        image: mongo:latest
-        ports:
-        - "27017:27017"
-```
-
-#### Dockerfile
-
-The Dockerfile for the Node.js application builds an image based on Alpine Linux, installs the necessary dependencies, and exposes port 5001 for the app.
-
-```dockerfile
-
-    FROM alpine:3.19
-
-    RUN apk add --no-cache nodejs npm python3 make g++
-
-    WORKDIR /app
-
-    COPY . /app
-
-    RUN npm install
-
-    # Rebuild bcrypt to match the correct architecture
-    RUN npm rebuild bcrypt --build-from-source
-
-    EXPOSE 5001
-
-    CMD ["npm", "run", "start"]
-```
+   Docker Compose Configuration
+   
+   The Docker Compose file defines two services: the Node.js app and MongoDB.
+   
+   ```yaml
+       version: '3'
+       services:
+       app:
+           build: .
+           ports:
+           - "5001:5001"
+           env_file:
+           - .env
+           environment:
+           NODE_ENV: docker
+           depends_on:
+           - mongo
+       mongo:
+           image: mongo:latest
+           ports:
+           - "27017:27017"
+   ```
+   
+   Dockerfile
+   
+   The Dockerfile for the Node.js application builds an image based on Alpine Linux, installs the necessary dependencies, and exposes port 5001 for the app.
+   
+   ```dockerfile
+   
+       FROM alpine:3.19
+   
+       RUN apk add --no-cache nodejs npm python3 make g++
+   
+       WORKDIR /app
+   
+       COPY . /app
+   
+       RUN npm install
+   
+       # Rebuild bcrypt to match the correct architecture
+       RUN npm rebuild bcrypt --build-from-source
+   
+       EXPOSE 5001
+   
+       CMD ["npm", "run", "start"]
+   ```
 
 
 
