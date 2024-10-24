@@ -56,21 +56,70 @@ Before running the project, make sure you have the following installed:
     ACCESS_TOKEN_SECRET=your_secret_key
     MONGO_URI=your_mongodb_uri
 
-5. Running the App with Docker
+4. Running the App with Docker
 This project is fully dockerized. You can run the app using Docker and Docker Compose.
 
 Step 1: Build and Run the Containers
 
-   ```bash
-   docker-compose up --build
+    
+    docker-compose up --build
 
 Step 2: Access the Application
 Once the containers are up, the application will be running on:
+    
+    http://localhost:5001
 
-   ```bash
-   http://localhost:5001
+MongoDB will be exposed on port 27017
 
-6. Start the server:
+### Docker Compose Configuration
+
+The Docker Compose file defines two services: the Node.js app and MongoDB.
+
+```yaml
+    version: '3'
+    services:
+    app:
+        build: .
+        ports:
+        - "5001:5001"
+        env_file:
+        - .env
+        environment:
+        NODE_ENV: docker
+        depends_on:
+        - mongo
+    mongo:
+        image: mongo:latest
+        ports:
+        - "27017:27017"
+```
+
+### Dockerfile
+
+The Dockerfile for the Node.js application builds an image based on Alpine Linux, installs the necessary dependencies, and exposes port 5001 for the app.
+
+```dockerfile 
+    FROM alpine:3.19
+
+    RUN apk add --no-cache nodejs npm python3 make g++
+
+    WORKDIR /app
+
+    COPY . /app
+
+    RUN npm install
+
+    # Rebuild bcrypt to match the correct architecture
+    RUN npm rebuild bcrypt --build-from-source
+
+    EXPOSE 5001
+
+    CMD ["npm", "run", "start"]
+```
+
+
+
+6. Running Locally Without Docker:
 
     ```bash
     npm start
@@ -173,7 +222,8 @@ Custom error handling middleware is used to ensure that any exceptions are caugh
 ## License
 This project is licensed under the MIT License. See the LICENSE file for more details.
 
-    ```
+    ```bash
+    
         You can adjust the repository link, environment variable names, or any other specific details as needed.
 
 Thank's for coming so far.
