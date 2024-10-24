@@ -59,17 +59,17 @@ Before running the project, make sure you have the following installed:
 4. Running the App with Docker
 This project is fully dockerized. You can run the app using Docker and Docker Compose.
 
-Step 1: Build and Run the Containers
+   Step 1: Build and Run the Containers
 
     
-    docker-compose up --build
+       docker-compose up --build
 
-Step 2: Access the Application
-Once the containers are up, the application will be running on:
+   Step 2: Access the Application
+   Once the containers are up, the application will be running on:
     
-    http://localhost:5001
+       http://localhost:5001
 
-MongoDB will be exposed on port 27017
+   MongoDB will be exposed on port 27017
 
 ### Docker Compose Configuration
 
