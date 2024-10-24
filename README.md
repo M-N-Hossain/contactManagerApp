@@ -71,7 +71,7 @@ Before running the project, make sure you have the following installed:
       
       MongoDB will be exposed on port 27017
 
-   Docker Compose Configuration
+   #### Docker Compose Configuration
    
    The Docker Compose file defines two services: the Node.js app and MongoDB.
    
@@ -94,7 +94,7 @@ Before running the project, make sure you have the following installed:
            - "27017:27017"
    ```
    
-   Dockerfile
+   #### Dockerfile
    
    The Dockerfile for the Node.js application builds an image based on Alpine Linux, installs the necessary dependencies, and exposes port 5001 for the app.
    
